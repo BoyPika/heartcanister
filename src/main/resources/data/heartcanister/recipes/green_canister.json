@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "heartcanisters",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "heartcanister:empty_canister"
+    },
+    {
+      "item": "heartcanister:green_heart"
+    }
+  ],
+  "result": {
+    "item": "heartcanister:green_canister"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "entities": [
+    "player"
+  ],
+  "slots": [
+    "hearts/green",
+    "hearts/yellow",
+    "hearts/red"
+  ]
+}

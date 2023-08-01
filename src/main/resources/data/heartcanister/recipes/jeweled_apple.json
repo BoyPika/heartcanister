@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " d ",
+    "dad",
+    " d "
+  ],
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "a": {
+      "item": "minecraft:apple"
+    }
+  },
+  "result": {
+    "item": "heartcanister:jeweled_apple"
+  }
+}

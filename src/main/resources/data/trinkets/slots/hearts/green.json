@@ -1,0 +1,5 @@
+{
+  "icon": "heartcanister:item/green_trinket",
+  "drop_rule": "keep",
+  "validator_predicates": ["trinkets:tag"]
+}
