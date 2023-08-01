@@ -8,7 +8,7 @@
     "BoyPika"
   ],
   "contact": {
-    "repo": "https://github.com/BoyPika/Heart Canister"
+    "issues": "https://github.com/BoyPika/heartcanister"
   },
   "license": "GPL-3.0",
   "environment": "*",
@@ -17,12 +17,14 @@
       "net.boypika.heartcanister.HeartCanister"
     ]
   },
+  "mixins": [
+    "heartcanister.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
-    "trinkets": "*",
-    "owo": "*"
+    "trinkets": "*"
   },
   "recommends": {
     "colorfulhearts": "*"

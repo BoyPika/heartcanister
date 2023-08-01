@@ -13,7 +13,7 @@ public class GreenHeartEffect extends InstantStatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity entity, int pAmplifier) {
         if (entity != null && !entity.isDead()){
-            entity.heal(CONFIG.GreenHealthHealAmountWhenAte());
+            entity.heal(CONFIG.nestedHeartObject.GreenHealthHealAmountWhenAte());
         }
         super.applyUpdateEffect(entity, pAmplifier);
     }
