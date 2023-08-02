@@ -39,6 +39,8 @@
   "text.config.heartcanister.option.nestedTrinketObject.TakeHealthOnUnequip": "Take away Health from Player on Trinket Unequip",
   "text.config.heartcanister.section.sectionhead": "Health Canister Settings",
   "text.config.heartcanister.title": "",
+  "text.heartcanister.hearttooltip1": "When Eaten Heals",
+  "text.heartcanister.hearttooltip2": "Health",
   "trinkets.slot.hearts.green": "Green Canister",
   "trinkets.slot.hearts.red": "Red Canister",
   "trinkets.slot.hearts.yellow": "Yellow Canister"

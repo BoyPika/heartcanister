@@ -7,6 +7,7 @@ import net.boypika.heartcanister.effects.RedHeartEffect;
 import net.boypika.heartcanister.effects.YellowHeartEffect;
 import net.boypika.heartcanister.potion.ModPotions;
 import net.boypika.heartcanister.trinkets.HeartCanisterItem;
+import net.boypika.heartcanister.trinkets.HeartItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.entity.effect.*;
@@ -23,6 +24,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 import static net.boypika.heartcanister.util.ItemGroup.HEARTCANISTERGROUP;
+import static net.minecraft.item.Items.register;
 
 public class HeartCanister implements ModInitializer {
     public static HeartCanisterConfig CONFIG = HeartCanisterConfig.createAndLoad();
@@ -35,16 +37,16 @@ public class HeartCanister implements ModInitializer {
     public static final Item YELLOWHEART;
     public static final Item GREENCANISTER;
     public static final Item GREENHEART;
-    public static final InstantStatusEffect GREENHEARTEFFECT = registerEffect(new Identifier("heartcanister", "green_heart"), new GreenHeartEffect(StatusEffectCategory.BENEFICIAL, 56133));
-    public static final InstantStatusEffect YELLOWHEARTEFFECT = registerEffect(new Identifier("heartcanister","yellow_heart"), new YellowHeartEffect(StatusEffectCategory.BENEFICIAL, 16776451));
-    public static final InstantStatusEffect REDHEARTEFFECT = registerEffect(new Identifier("heartcanister","red_heart"), new RedHeartEffect(StatusEffectCategory.BENEFICIAL, 16318464));
+    public static final InstantStatusEffect GREENHEARTEFFECT = registerEffect(Identifier("green_heart"), new GreenHeartEffect(StatusEffectCategory.BENEFICIAL, 56133));
+    public static final InstantStatusEffect YELLOWHEARTEFFECT = registerEffect(Identifier("yellow_heart"), new YellowHeartEffect(StatusEffectCategory.BENEFICIAL, 16776451));
+    public static final InstantStatusEffect REDHEARTEFFECT = registerEffect(Identifier("red_heart"), new RedHeartEffect(StatusEffectCategory.BENEFICIAL, 16318464));
     static {
         JEWELED = registerItem("jeweled_apple", 64, new FoodComponent.Builder().hunger(4).saturationModifier(1.2F).statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 1200, 0), 1).statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 1200, 0), 1).statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 4),1).statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 1200,0),1).alwaysEdible().build());
         NECROTIC = registerItem("necrotic_bone",64, null);
         CANISTER = registerItem("empty_canister", CONFIG.nestedStackCount.CanisterStackCount(), null);
-        REDHEART = registerHeart("red_heart", REDHEARTEFFECT);
-        YELLOWHEART = registerHeart("yellow_heart", YELLOWHEARTEFFECT);
-        GREENHEART = registerHeart("green_heart", GREENHEARTEFFECT);
+        REDHEART = register(Identifier("red_heart"), (new HeartItem.RedHeartItem(registerHeart(REDHEARTEFFECT))));
+        YELLOWHEART = register(Identifier("yellow_heart"), (new HeartItem.YellowHeartItem(registerHeart(YELLOWHEARTEFFECT))));
+        GREENHEART = register(Identifier("green_heart"), (new HeartItem.GreenHeartItem(registerHeart(GREENHEARTEFFECT))));
         REDCANISTER = registerHeartCanister("red_canister");
         YELLOWCANISTER = registerHeartCanister("yellow_canister");
         GREENCANISTER = registerHeartCanister("green_canister");
@@ -53,13 +55,16 @@ public class HeartCanister implements ModInitializer {
         return  Registry.register(Registries.STATUS_EFFECT, id, entry);
     }
     private static Item registerItem(String name, int stackCount, FoodComponent food){
-        return Registry.register(Registries.ITEM, new Identifier("heartcanister", name), new Item(new OwoItemSettings().group(HEARTCANISTERGROUP).maxCount(stackCount).food(food)));
+        return Registry.register(Registries.ITEM, Identifier(name), new Item(new OwoItemSettings().group(HEARTCANISTERGROUP).maxCount(stackCount).food(food)));
     }
-    private static Item registerHeart(String name, StatusEffect effect){
-        return Registry.register(Registries.ITEM, new Identifier("heartcanister", name), new Item(new OwoItemSettings().group(HEARTCANISTERGROUP).maxCount(CONFIG.nestedStackCount.HeartStackCount()).food(new FoodComponent.Builder().hunger(0).saturationModifier(0).statusEffect(new StatusEffectInstance(effect, 1, 0), 1).alwaysEdible().build())));
+    public static OwoItemSettings registerHeart(StatusEffect effect){
+        return new OwoItemSettings().group(HEARTCANISTERGROUP).maxCount(CONFIG.nestedStackCount.HeartStackCount()).food(new FoodComponent.Builder().hunger(0).saturationModifier(0).statusEffect(new StatusEffectInstance(effect, 1, 0), 1).alwaysEdible().build());
+    }
+    public static Identifier Identifier(String name){
+        return new Identifier("heartcanister", name);
     }
     private static Item registerHeartCanister(String name){
-     return Registry.register(Registries.ITEM, new Identifier("heartcanister", name), new HeartCanisterItem(new OwoItemSettings().group(HEARTCANISTERGROUP).maxCount(CONFIG.nestedStackCount.CanisterStackCount())));
+     return Registry.register(Registries.ITEM, Identifier(name), new HeartCanisterItem(new OwoItemSettings().group(HEARTCANISTERGROUP).maxCount(CONFIG.nestedStackCount.CanisterStackCount())));
     }
     private static final Identifier DUNGEON
             = new Identifier("minecraft", "chests/simple_dungeon");
