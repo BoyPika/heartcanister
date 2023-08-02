@@ -7,6 +7,7 @@
   "authors": [
     "BoyPika"
   ],
+  "icon": "assets/heartcanister/textures/item/red_canister.png",
   "contact": {
     "issues": "https://github.com/BoyPika/heartcanister"
   },
@@ -23,7 +24,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": "${minecraft_version}",
+    "minecraft": ">=${minecraft_version}",
     "trinkets": "*",
     "owo": "*"
   },
