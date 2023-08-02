@@ -13,8 +13,8 @@ import java.util.UUID;
 
 import static net.boypika.heartcanister.HeartCanister.CONFIG;
 
-public class YellowHeartCanisterItem extends TrinketItem{
-    public YellowHeartCanisterItem(Settings settings) {
+public class HeartCanisterItem extends TrinketItem{
+    public HeartCanisterItem(Settings settings) {
         super(settings);
     }
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
