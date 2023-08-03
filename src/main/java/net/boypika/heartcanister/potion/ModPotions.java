@@ -5,8 +5,7 @@ import net.boypika.heartcanister.mixin.BrewingRecipeRegistryMixin;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.Potions;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModPotions {
@@ -21,7 +20,7 @@ public class ModPotions {
     }
 
     public static Potion registerPotion(String name, Potion potion) {
-        return Registry.register(Registries.POTION, new Identifier("heartcanister", name), potion);
+        return Registry.register(Registry.POTION, new Identifier("heartcanister", name), potion);
     }
 
 

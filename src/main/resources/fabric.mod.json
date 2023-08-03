@@ -4,14 +4,12 @@
   "version": "${version}",
   "name": "Heart Canister",
   "description": "Another Mod to add Tinkers' Construct Heart Canisters",
-  "authors": [
-    "BoyPika"
-  ],
-  "icon": "assets/heartcanister/textures/item/red_canister.png",
+  "authors": ["BoyPika"],
   "contact": {
     "issues": "https://github.com/BoyPika/heartcanister"
   },
   "license": "GPL-3.0",
+  "icon": "assets/heartcanister/textures/item/red_canister.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -22,9 +20,9 @@
     "heartcanister.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": ">=1.19.3",
+    "minecraft": ">=1.19",
     "trinkets": "*",
     "owo": "*"
   },

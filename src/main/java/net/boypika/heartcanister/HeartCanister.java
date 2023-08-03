@@ -1,6 +1,5 @@
 package net.boypika.heartcanister;
 
-import io.wispforest.owo.itemgroup.OwoItemSettings;
 import net.boypika.heartcanister.config.HeartCanisterConfig;
 import net.boypika.heartcanister.effects.GreenHeartEffect;
 import net.boypika.heartcanister.effects.RedHeartEffect;
@@ -19,12 +18,11 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 
-import static net.boypika.heartcanister.util.ItemGroup.HEARTCANISTERGROUP;
-import static net.minecraft.item.Items.register;
+import static net.boypika.heartcanister.util.ModItemGroup.HEARTCANISTERGROUP;
 
 public class HeartCanister implements ModInitializer {
     public static HeartCanisterConfig CONFIG = HeartCanisterConfig.createAndLoad();
@@ -46,73 +44,75 @@ public class HeartCanister implements ModInitializer {
         CANISTER = registerItem("empty_canister", CONFIG.nestedStackCount.CanisterStackCount(), null);
         REDHEART = register(Identifier("red_heart"), (new HeartItem.RedHeartItem(registerHeart(REDHEARTEFFECT))));
         YELLOWHEART = register(Identifier("yellow_heart"), (new HeartItem.YellowHeartItem(registerHeart(YELLOWHEARTEFFECT))));
-        GREENHEART = register(Identifier("green_heart"), (new HeartItem.GreenHeartItem(registerHeart(GREENHEARTEFFECT))));
+        GREENHEART = register(Identifier("green_heart"), new HeartItem.GreenHeartItem(registerHeart(GREENHEARTEFFECT)));
         REDCANISTER = registerHeartCanister("red_canister");
         YELLOWCANISTER = registerHeartCanister("yellow_canister");
         GREENCANISTER = registerHeartCanister("green_canister");
     }
+    public static Item register(Identifier id, Item item) {
+        return register(RegistryKey.of(Registry.ITEM.getKey(), id), item);
+    }
+    public static Item register(RegistryKey<Item> key, Item item) {
+        return Registry.register(Registry.ITEM, key, item);
+    }
     private static InstantStatusEffect registerEffect(Identifier id, InstantStatusEffect entry) {
-        return  Registry.register(Registries.STATUS_EFFECT, id, entry);
+        return  Registry.register(Registry.STATUS_EFFECT, id, entry);
     }
     private static Item registerItem(String name, int stackCount, FoodComponent food){
-        return Registry.register(Registries.ITEM, Identifier(name), new Item(new OwoItemSettings().group(HEARTCANISTERGROUP).maxCount(stackCount).food(food)));
+        return Registry.register(Registry.ITEM, Identifier(name), new Item(new Item.Settings().group(HEARTCANISTERGROUP).maxCount(stackCount).food(food)));
     }
-    public static OwoItemSettings registerHeart(StatusEffect effect){
-        return new OwoItemSettings().group(HEARTCANISTERGROUP).maxCount(CONFIG.nestedStackCount.HeartStackCount()).food(new FoodComponent.Builder().hunger(0).saturationModifier(0).statusEffect(new StatusEffectInstance(effect, 1, 0), 1).alwaysEdible().build());
+    public static Item.Settings registerHeart(StatusEffect effect){
+        return new Item.Settings().group(HEARTCANISTERGROUP).maxCount(CONFIG.nestedStackCount.HeartStackCount()).food(new FoodComponent.Builder().hunger(0).saturationModifier(0).statusEffect(new StatusEffectInstance(effect, 1, 0), 1).alwaysEdible().build());
     }
     public static Identifier Identifier(String name){
         return new Identifier("heartcanister", name);
     }
     private static Item registerHeartCanister(String name){
-     return Registry.register(Registries.ITEM, Identifier(name), new HeartCanisterItem(new OwoItemSettings().group(HEARTCANISTERGROUP).maxCount(CONFIG.nestedStackCount.CanisterStackCount())));
+        return Registry.register(Registry.ITEM, Identifier(name), new HeartCanisterItem(new Item.Settings().group(HEARTCANISTERGROUP).maxCount(CONFIG.nestedStackCount.CanisterStackCount())));
     }
     private static final Identifier DUNGEON
             = new Identifier("minecraft", "chests/simple_dungeon");
     private static final Identifier FORTRESS
             = new Identifier("minecraft", "chests/nether_bridge");
-
-
-    public static void modifyLootTables() {
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-
-            if(DUNGEON.equals(id)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
+    public static void modifyLootTables(){
+        LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (DUNGEON.equals(id)){
+                LootPool.Builder pool = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(CONFIG.nestedLootChance.RedHeartLootChance()))
                         .with(ItemEntry.builder(REDHEART))
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(CONFIG.nestedLootChance.RedHeartLootChance(), CONFIG.nestedLootChance.RedHeartLootChance())).build());
-                tableBuilder.pool(poolBuilder.build());
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(CONFIG.nestedLootChance.RedHeartLootChance(), CONFIG.nestedLootChance.RedHeartLootChance())));
+                tableBuilder.pool(pool);
             }
             if (DUNGEON.equals(id)){
-                LootPool.Builder poolBuilder = LootPool.builder()
+                LootPool.Builder pool = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(CONFIG.nestedLootChance.YellowHeartDungeonLootChance()))
                         .with(ItemEntry.builder(YELLOWHEART))
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(CONFIG.nestedLootChance.YellowHeartDungeonLootChance(), CONFIG.nestedLootChance.YellowHeartDungeonLootChance())).build());
-                tableBuilder.pool(poolBuilder.build());
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(CONFIG.nestedLootChance.YellowHeartDungeonLootChance(), CONFIG.nestedLootChance.YellowHeartDungeonLootChance())));
+                tableBuilder.pool(pool);
             }
             if (FORTRESS.equals(id)){
-                LootPool.Builder poolBuilder = LootPool.builder()
+                LootPool.Builder pool = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(CONFIG.nestedLootChance.YellowHeartFortressLootChance()))
                         .with(ItemEntry.builder(YELLOWHEART))
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(CONFIG.nestedLootChance.YellowHeartFortressLootChance(), CONFIG.nestedLootChance.YellowHeartFortressLootChance())).build());
-                tableBuilder.pool(poolBuilder.build());
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(CONFIG.nestedLootChance.YellowHeartFortressLootChance(), CONFIG.nestedLootChance.YellowHeartFortressLootChance())));
+                tableBuilder.pool(pool);
             }
             if (FORTRESS.equals(id)){
-                LootPool.Builder poolBuilder = LootPool.builder()
+                LootPool.Builder pool = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(CONFIG.nestedLootChance.GreenHeartLootChance()))
                         .with(ItemEntry.builder(GREENHEART))
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(CONFIG.nestedLootChance.GreenHeartLootChance(), CONFIG.nestedLootChance.GreenHeartLootChance())).build());
-                tableBuilder.pool(poolBuilder.build());
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(CONFIG.nestedLootChance.GreenHeartLootChance(), CONFIG.nestedLootChance.GreenHeartLootChance())));
+                tableBuilder.pool(pool);
             }
-        });
+        }));
     }
     @Override
     public void onInitialize() {
         modifyLootTables();
         ModPotions.registerPotionRecipes();
-        HEARTCANISTERGROUP.initialize();
     }
 }
