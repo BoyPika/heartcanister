@@ -53,7 +53,7 @@ public class HeartCanister implements ModInitializer {
         return register(RegistryKey.of(Registry.ITEM.getKey(), id), item);
     }
     public static Item register(RegistryKey<Item> key, Item item) {
-        return Registry.register(Registry.ITEM, key, item);
+        return Registry.register(Registry.ITEM, key.getValue(), item);
     }
     private static InstantStatusEffect registerEffect(Identifier id, InstantStatusEffect entry) {
         return  Registry.register(Registry.STATUS_EFFECT, id, entry);
