@@ -1,19 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:apple"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    }
+  },
   "pattern": [
     " d ",
     "dad",
     " d "
   ],
-  "key": {
-    "d": {
-      "item": "minecraft:diamond"
-    },
-    "a": {
-      "item": "minecraft:apple"
-    }
-  },
   "result": {
     "item": "heartcanister:jeweled_apple"
-  }
+  },
+  "show_notification": true
 }

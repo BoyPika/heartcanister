@@ -4,7 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.InstantStatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
-import static net.boypika.heartcanister.HeartCanister.CONFIG;
+import static net.boypika.heartcanister.HeartCanister.config;
 public class YellowHeartEffect extends InstantStatusEffect {
     public YellowHeartEffect(StatusEffectCategory statusEffectCategory, int color) {
         super(statusEffectCategory, color);
@@ -12,7 +12,7 @@ public class YellowHeartEffect extends InstantStatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity entity, int pAmplifier) {
         if (entity != null && !entity.isDead()){
-            entity.heal(CONFIG.nestedHeartObject.YellowHealthHealAmountWhenAte());
+            entity.heal(config().nestedHeartObject.YellowHealthHealAmountWhenAte);
         }
         super.applyUpdateEffect(entity, pAmplifier);
     }

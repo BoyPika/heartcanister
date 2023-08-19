@@ -1,19 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "CCC",
-    "CBC",
-    "CCC"
-  ],
+  "category": "misc",
   "key": {
-    "B": {
+    "b": {
       "item": "minecraft:bone"
     },
-    "C": {
+    "c": {
       "item": "minecraft:coal"
     }
   },
+  "pattern": [
+    "ccc",
+    "cbc",
+    "ccc"
+  ],
   "result": {
     "item": "heartcanister:necrotic_bone"
-  }
+  },
+  "show_notification": true
 }

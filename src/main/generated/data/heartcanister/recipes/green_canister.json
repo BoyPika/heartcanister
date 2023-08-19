@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "heartcanisters",
+  "category": "equipment",
   "ingredients": [
     {
-      "item": "minecraft:golden_apple"
+      "item": "heartcanister:green_heart"
     },
     {
       "item": "heartcanister:empty_canister"
     },
     {
-      "item": "heartcanister:red_heart"
+      "item": "minecraft:nether_star"
     }
   ],
   "result": {
-    "item": "heartcanister:red_canister"
+    "item": "heartcanister:green_canister"
   }
 }

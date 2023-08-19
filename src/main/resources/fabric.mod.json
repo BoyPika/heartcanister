@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "net.boypika.heartcanister.HeartCanister"
+    ],
+    "fabric-datagen": [
+      "net.boypika.heartcanister.util.ModDataGeneration"
     ]
   },
   "mixins": [
@@ -25,10 +28,12 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": ">=1.19.3",
-    "trinkets": "*",
-    "owo": "*"
+    "trinkets": "*"
   },
   "recommends": {
     "colorfulhearts": "*"
+  },
+  "conflicts": {
+    "tconstruct": "*"
   }
 }

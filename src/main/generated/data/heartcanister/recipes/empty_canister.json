@@ -1,14 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "iii"
-  ],
+  "category": "misc",
   "key": {
     "i": {
       "item": "minecraft:iron_ingot"
     }
   },
+  "pattern": [
+    "iii"
+  ],
   "result": {
     "item": "heartcanister:empty_canister"
-  }
+  },
+  "show_notification": true
 }
