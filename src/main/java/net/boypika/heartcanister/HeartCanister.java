@@ -7,12 +7,13 @@ import net.boypika.heartcanister.effects.YellowHeartEffect;
 import net.boypika.heartcanister.potion.ModPotions;
 import net.boypika.heartcanister.trinkets.HeartCanisterItem;
 import net.boypika.heartcanister.trinkets.HeartItem;
-import net.boypika.heartcanister.util.ModItemGroup;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.entity.effect.*;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
@@ -21,6 +22,7 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,10 +118,24 @@ public class HeartCanister implements ModInitializer {
         registerItems();
         modifyLootTables();
         ModPotions.registerPotionRecipes();
-        ModItemGroup.registerModGroup();
     }
     public static ModConfig config() {
         return (ModConfig) ConfigManager.get("heartcanister");
     }
-
+    public static final ItemGroup HEARTCANISTERGROUP = FabricItemGroup.builder(new Identifier("heartcanister", "hearts"))
+            .icon(() -> REDCANISTER.getDefaultStack())
+            .displayName(Text.translatable("itemGroup.heartcanister.hearts"))
+            .noScrollbar()
+            .entries(((displayContext, entries) -> {
+                entries.add(JEWELED);
+                entries.add(NECROTIC);
+                entries.add(CANISTER);
+                entries.add(REDHEART);
+                entries.add(YELLOWHEART);
+                entries.add(GREENHEART);
+                entries.add(REDCANISTER);
+                entries.add(YELLOWCANISTER);
+                entries.add(GREENCANISTER);
+            }))
+            .build();
 }
