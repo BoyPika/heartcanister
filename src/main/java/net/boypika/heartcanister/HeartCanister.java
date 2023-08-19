@@ -126,7 +126,7 @@ public class HeartCanister implements ModInitializer {
             .icon(() -> REDCANISTER.getDefaultStack())
             .displayName(Text.translatable("itemGroup.heartcanister.hearts"))
             .noScrollbar()
-            .entries(((displayContext, entries) -> {
+            .entries(((enabledFeatures, entries, operatorEnabled) -> {
                 entries.add(JEWELED);
                 entries.add(NECROTIC);
                 entries.add(CANISTER);
