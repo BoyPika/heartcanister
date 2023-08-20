@@ -25,9 +25,9 @@
     "heartcanister.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.19.3",
+    "minecraft": "1.19.4",
     "trinkets": "*"
   },
   "recommends": {
