@@ -8,6 +8,9 @@ import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 
 import java.util.function.Consumer;
 
@@ -24,6 +27,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
             ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, HeartCanister.NECROTIC).pattern("ccc").pattern("cbc").pattern("ccc")
                     .input('b', Items.BONE)
                     .input('c', Items.COAL).criterion(FabricRecipeProvider.hasItem(Items.BONE), FabricRecipeProvider.conditionsFromItem(Items.BONE)).offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, HeartCanister.YELLOWCANISTER).input(TagKey.of(RegistryKeys.ITEM, new Identifier("heartcanister", "necrotic_bone"))).input(TagKey.of(RegistryKeys.ITEM, new Identifier("heartcanister", "jeweled_apple"))).input(HeartCanister.CANISTER).input(HeartCanister.YELLOWHEART).criterion(FabricRecipeProvider.hasItem(HeartCanister.YELLOWHEART), FabricRecipeProvider.conditionsFromItem(HeartCanister.YELLOWHEART)).offerTo(exporter);
         ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, HeartCanister.REDCANISTER).input(HeartCanister.REDHEART).input(HeartCanister.CANISTER).input(Items.GOLDEN_APPLE).criterion(FabricRecipeProvider.hasItem(HeartCanister.REDHEART), FabricRecipeProvider.conditionsFromItem(HeartCanister.REDHEART)).offerTo(exporter);
         ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, HeartCanister.GREENCANISTER).input(HeartCanister.GREENHEART).input(HeartCanister.CANISTER).input(Items.NETHER_STAR).criterion(FabricRecipeProvider.hasItem(HeartCanister.GREENHEART), FabricRecipeProvider.conditionsFromItem(HeartCanister.GREENHEART)).offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, HeartCanister.CANISTER).pattern("iii")

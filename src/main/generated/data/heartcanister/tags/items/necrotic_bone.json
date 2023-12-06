@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "heartcanister:necrotic_bone",
+      "required": false
+    },
+    {
+      "id": "tconstruct:necrotic_bone",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "heartcanister:jeweled_apple",
+      "required": false
+    },
+    {
+      "id": "tconstruct:jeweled_apple",
+      "required": false
+    }
+  ]
+}

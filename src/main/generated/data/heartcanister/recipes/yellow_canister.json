@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "heartcanisters",
+  "category": "equipment",
   "ingredients": [
     {
-      "item": "heartcanister:jeweled_apple"
+      "tag": "heartcanister:necrotic_bone"
     },
     {
-      "item": "heartcanister:necrotic_bone"
+      "tag": "heartcanister:jeweled_apple"
     },
     {
       "item": "heartcanister:empty_canister"

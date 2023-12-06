@@ -10,6 +10,7 @@ import net.boypika.heartcanister.trinkets.HeartItem;
 import net.boypika.heartcanister.util.ModItemGroup;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.effect.*;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
@@ -41,15 +42,25 @@ public class HeartCanister implements ModInitializer {
     public static final InstantStatusEffect YELLOWHEARTEFFECT = registerEffect(Identifier("yellow_heart"), new YellowHeartEffect(StatusEffectCategory.BENEFICIAL, 16776451));
     public static final InstantStatusEffect REDHEARTEFFECT = registerEffect(Identifier("red_heart"), new RedHeartEffect(StatusEffectCategory.BENEFICIAL, 16318464));
     public static void registerItems() {
-        JEWELED = registerItem("jeweled_apple", 64, new FoodComponent.Builder().hunger(4).saturationModifier(1.2F).statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 1200, 0), 1).statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 1200, 0), 1).statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 4),1).statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 1200,0),1).alwaysEdible().build());
-        NECROTIC = registerItem("necrotic_bone",64, null);
-        CANISTER = registerItem("empty_canister", config().nestedStackCount.CanisterStackCount, null);
-        REDHEART = Registry.register(Registries.ITEM, Identifier("red_heart"), (new HeartItem.RedHeartItem(registerHeart(REDHEARTEFFECT))));
-        YELLOWHEART = Registry.register(Registries.ITEM, Identifier("yellow_heart"), (new HeartItem.YellowHeartItem(registerHeart(YELLOWHEARTEFFECT))));
-        GREENHEART = Registry.register(Registries.ITEM, Identifier("green_heart"), (new HeartItem.GreenHeartItem(registerHeart(GREENHEARTEFFECT))));
-        REDCANISTER = registerHeartCanister("red_canister");
-        YELLOWCANISTER = registerHeartCanister("yellow_canister");
-        GREENCANISTER = registerHeartCanister("green_canister");
+        if (FabricLoader.getInstance().isModLoaded("tconstruct")){
+            CANISTER = registerItem("empty_canister", config().nestedStackCount.CanisterStackCount, null);
+            REDHEART = Registry.register(Registries.ITEM, Identifier("red_heart"), (new HeartItem.RedHeartItem(registerHeart(REDHEARTEFFECT))));
+            YELLOWHEART = Registry.register(Registries.ITEM, Identifier("yellow_heart"), (new HeartItem.YellowHeartItem(registerHeart(YELLOWHEARTEFFECT))));
+            GREENHEART = Registry.register(Registries.ITEM, Identifier("green_heart"), (new HeartItem.GreenHeartItem(registerHeart(GREENHEARTEFFECT))));
+            REDCANISTER = registerHeartCanister("red_canister");
+            YELLOWCANISTER = registerHeartCanister("yellow_canister");
+            GREENCANISTER = registerHeartCanister("green_canister");
+        } else {
+            CANISTER = registerItem("empty_canister", config().nestedStackCount.CanisterStackCount, null);
+            REDHEART = Registry.register(Registries.ITEM, Identifier("red_heart"), (new HeartItem.RedHeartItem(registerHeart(REDHEARTEFFECT))));
+            YELLOWHEART = Registry.register(Registries.ITEM, Identifier("yellow_heart"), (new HeartItem.YellowHeartItem(registerHeart(YELLOWHEARTEFFECT))));
+            GREENHEART = Registry.register(Registries.ITEM, Identifier("green_heart"), (new HeartItem.GreenHeartItem(registerHeart(GREENHEARTEFFECT))));
+            REDCANISTER = registerHeartCanister("red_canister");
+            YELLOWCANISTER = registerHeartCanister("yellow_canister");
+            GREENCANISTER = registerHeartCanister("green_canister");
+            JEWELED = registerItem("jeweled_apple", 64, new FoodComponent.Builder().hunger(4).saturationModifier(1.2F).statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 1200, 0), 1).statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 1200, 0), 1).statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 4),1).statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 1200,0),1).alwaysEdible().build());
+            NECROTIC = registerItem("necrotic_bone",64, null);
+        }
     }
     public static InstantStatusEffect registerEffect(Identifier id, InstantStatusEffect entry) {
         return  Registry.register(Registries.STATUS_EFFECT, id, entry);
