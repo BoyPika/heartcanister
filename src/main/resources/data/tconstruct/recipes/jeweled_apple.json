@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:apple"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    " d ",
+    "dad",
+    " d "
+  ],
+  "result": {
+    "item": "tconstruct:jeweled_apple"
+  },
+  "show_notification": true
+}
